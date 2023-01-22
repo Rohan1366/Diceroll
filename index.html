@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Throw Dice</title>
+
+    <style>
+        #winner {
+            text-align: center;
+            margin: auto;
+        }
+        #member-1,#member-2,#member-3{
+            width: 150px;
+            height: 150px;
+            margin: 30px;
+            text-align: center;
+            
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            padding-top: 30px;
+            padding-bottom: -20px;
+        }
+        #parent {
+            width: 80%;
+            margin: auto;
+        }
+        #memberdata {
+            display: flex;
+            justify-content: center;
+        }
+        #roll {
+        margin-top: 25px;
+        text-align: center;
+        border-radius: 5px;
+        background-color: gray;
+        border: none;
+        color: white;
+        font-size: 25px;
+        padding: 10px;
+        }
+        #btn-div {
+         text-align: center;
+         margin: auto;
+        }
+        #roll:hover {
+        background-color: rgb(53, 52, 52);
+        cursor: pointer;
+        border: 1px solid black;
+    }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <div id="winner">
+            <h1>The Winner: <span id="winnerteam"></span></h1>
+        </div>
+        <div id="memberdata">
+            
+            <div id="member-1">
+                
+                <h1 id="score1"></h1>
+            </div>
+            <div id="member-2">
+                
+                <h1 id="score2"></h1>
+            </div>
+            <div id="member-3">
+                
+                <h1 id="score3"></h1>
+            </div>
+        </div>
+        <div id="btn-div"><button id="roll">ROLL THE DICE</button></div>
+        
+    </div>
+
+
+    
+</body>
+
+</html>
+<script>
+
+    document.getElementById("roll").addEventListener("click", roleDice)
+        
+            function roleDice(){
+                var score1=Math.floor((Math.random() *6)+1);
+                document.getElementById("score1").innerText=score1;
+                var score2=Math.floor((Math.random() *6)+1);
+                document.getElementById("score2").innerText=score2;
+                var score3=Math.floor((Math.random() *6)+1);
+                document.getElementById("score3").innerText=score3;
+                if(score1 === score2 && score2 === score3 ){
+                    document.getElementById("winnerteam").innerHTML="Draw";
+                    document.getElementById("member-1").style.backgroundColor="blue";
+                    document.getElementById("member-2").style.backgroundColor="blue";
+                    document.getElementById("member-3").style.backgroundColor="blue";
+                }else if(score1 === score2 || score1 == score3 || score2 === score3){
+                    if(score1 === score2){
+                      document.getElementById("winnerteam").innerHTML="Draw";
+                      document.getElementById("member-1").style.backgroundColor="blue";
+                      document.getElementById("member-2").style.backgroundColor="blue";
+                    if(score3 > score1){
+                        document.getElementById("member-3").style.backgroundColor="green";
+                    }
+                    else{
+                        document.getElementById("member-3").style.backgroundColor="yellow";
+                    }
+                    }else if(score1 === score3){
+                      document.getElementById("winnerteam").innerHTML="Draw";
+                      document.getElementById("member-1").style.backgroundColor="blue";
+                      document.getElementById("member-3").style.backgroundColor="blue";
+                      if(score2 > score1){
+                        document.getElementById("member-2").style.backgroundColor="green";
+                      }
+                      else{
+                        document.getElementById("member-2").style.backgroundColor="green";
+                      }
+                    }else if(score2 == score3){
+                      document.getElementById("winnerteam").innerHTML="Draw";
+                      document.getElementById("member-2").style.backgroundColor="blue";
+                      document.getElementById("member-3").style.backgroundColor="blue";
+                    if(score1 > score2){
+                        document.getElementById("member-1").style.backgroundColor="green";
+                    }
+                    else{
+                        document.getElementById("member-1").style.backgroundColor="yellow";
+                    }
+                    }
+                }else{
+                    if (score1 > score2 && score1 > score3) {
+                        document.getElementById("winnerteam").innerText = 1;
+                        document.getElementById("member-1").style.backgroundColor = "green";
+                        if (score2 > score3) {
+                           document.getElementById("member-2").style.backgroundColor = "yellow";
+                           document.getElementById("member-3").style.backgroundColor = "red";
+                        } else {
+                           document.getElementById("member-2").style.backgroundColor = "red";
+                           document.getElementById("member-3").style.backgroundColor = "yellow";
+                        }
+                    } else if (score2 > score1 && score2 > score3) {
+                            document.getElementById("winnerteam").innerText = 2;
+                            document.getElementById("member-2").style.backgroundColor = "green";
+                            if (score1 > score3) {
+                               document.getElementById("member-1").style.backgroundColor = "yellow";
+                               document.getElementById("member-3").style.backgroundColor = "red";
+                            } else {
+                               document.getElementById("member-1").style.backgroundColor = "red";
+                               document.getElementById("member-3").style.backgroundColor = "yellow";
+                            }
+                    }else {
+                        document.getElementById("winnerteam").innerText = 3;
+                        document.getElementById("member-3").style.backgroundColor = "green";
+                        if (score1 > score2) {
+                        document.getElementById("member-1").style.backgroundColor = "yellow";
+                        document.getElementById("member-2").style.backgroundColor = "red";
+                     } else {
+                        document.getElementById("member-1").style.backgroundColor = "red";
+                        document.getElementById("member-2").style.backgroundColor = "yellow";
+                     }
+                    }
+                }
+                
+        }
+        </script>
